@@ -13,6 +13,10 @@ app.use(express.json());
 app.use('/api/auth', userRoutes);
 app.use('/api/messages', messagesRoutes);
 
+app.get('/',(req,res) => {
+    res.write("Server is running");
+});
+
 mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log('DB connection success');
 }).catch((err) => {
@@ -25,7 +29,7 @@ const server = app.listen(process.env.PORT, () => {
 
 const io = socket(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "https://skippy-chat.netlify.app/",
         credentials: true
     },
 });
